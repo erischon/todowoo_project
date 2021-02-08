@@ -45,11 +45,15 @@ def createtodo(request):
     if request.method == 'GET':
         return render(request, 'todo/createtodo.html', {'form':TodoForm()})
     else:
-        form = TodoForm(request.POST)
-        newtodo = form.save(commit=False)
-        newtodo.user = request.user
-        newtodo.save()
-        return redirect('currenttodos')
+        try:
+            form = TodoForm(request.POST)
+            newtodo = form.save(commit=False)
+            newtodo.user = request.user
+            newtodo.save()
+            return redirect('currenttodos')
+        except ValueError:
+            return render(request, 'todo/createtodo.html', {'form':TodoForm(), 'error': 'Bad data passed in. Try again.'})
+
 
 def currenttodos(request):
     return render(request, 'todo/currenttodos.html')
