@@ -62,4 +62,5 @@ def currenttodos(request):
 
 def viewtodo(request, todo_pk):
     todo = get_object_or_404(Todo, pk=todo_pk)
-    return render(request, 'todo/viewtodo.html', {'todo':todo})
+    form = TodoForm(instance=todo)
+    return render(request, 'todo/viewtodo.html', {'todo':todo, 'form':form})
