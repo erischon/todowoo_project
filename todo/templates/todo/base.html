@@ -22,12 +22,14 @@
             <li><a href="{% url 'completedtodos' %}">Completed</a></li>
         </ul>   
 
-        Logged In as {{ user.username }}
+        <div class="access">
+            Logged In as {{ user.username }}
 
-        <form action="{% url 'logoutuser' %}" method="POST">
-            {% csrf_token %}
-            <button type="submit">Log Out</button>
-        </form>
+            <form action="{% url 'logoutuser' %}" method="POST">
+                {% csrf_token %}
+                <button type="submit">Log Out</button>
+            </form>
+        </div>
 
     </div>
 
